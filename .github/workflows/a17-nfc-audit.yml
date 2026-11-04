@@ -1,0 +1,20 @@
+name: Android 17 NFC legacy app isolation audit
+
+on:
+  push:
+    branches:
+      - audit/a17-mondrian-nfc-20261104
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  legacy-nfc-inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check historical NFC patches and Soong module identity
+        run: python3 tools/verify_a17_nfc_legacy.py
